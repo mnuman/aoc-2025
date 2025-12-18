@@ -22,5 +22,18 @@ def part1(fname) -> int:
     return sum([1 for pos in positions if count_neighbours(positions, pos) < 4])
 
 
+def part2(fname) -> int:
+    positions = read_file(fname)
+    removed = 0
+    while True:
+        to_remove = {pos for pos in positions if count_neighbours(positions, pos) < 4}
+        if not to_remove:
+            break
+        positions.difference_update(to_remove)
+        removed += len(to_remove)
+    return removed
+
+
 if __name__ == "__main__":
     print(f"Part 1: {part1("day04.txt")}")
+    print(f"Part 2: {part2("day04.txt")}")
