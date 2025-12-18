@@ -1,7 +1,5 @@
 import file_utils as fu
 
-LENGTH_JOLT_NUMBER = 12
-
 
 def read_file(fname):
     input_lines = fu.read_file(fname)

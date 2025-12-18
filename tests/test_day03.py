@@ -11,4 +11,4 @@ def test_extract_max():
 
 
 def test_part02():
-    assert day03.part22("test_day03.txt") == 3121910778619
+    assert day03.part2("test_day03.txt") == 3121910778619
