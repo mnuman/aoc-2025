@@ -1,9 +1,10 @@
+from collections import defaultdict
 import file_utils as fu
 
 SPLITTER = "^"
 FREE = "."
 BEAM = "|"
-DEBUG = False
+DEBUG = True
 
 
 def read_file(fname):
@@ -35,5 +36,40 @@ def part1(fname):
     return splits
 
 
+def part2(fname):
+    start, grid = read_file(fname)
+    rows = len(grid)
+    cols = len(grid[0])
+    r0, c0 = start
+
+    from collections import defaultdict
+
+    counts = defaultdict(int)
+    counts[c0] = 1
+
+    for r in range(r0 + 1, rows):
+        new_counts = defaultdict(int)
+        for c, cnt in list(counts.items()):
+            if cnt == 0:
+                continue
+            # ensure column in range
+            if c < 0 or c >= cols:
+                continue
+            ch = grid[r][c]
+            if ch == SPLITTER:
+                # split to left and right positions in this same row if free
+                if c - 1 >= 0 and grid[r][c - 1] == FREE:
+                    new_counts[c - 1] += cnt
+                if c + 1 < cols and grid[r][c + 1] == FREE:
+                    new_counts[c + 1] += cnt
+            elif ch == FREE:
+                new_counts[c] += cnt
+            # other characters (S, etc.) are ignored for movement
+        counts = new_counts
+
+    return sum(counts.values())
+
+
 if __name__ == "__main__":
     print("Part 1:", part1("day07.txt"))
+    print("Part 2:", part2("day07.txt"))

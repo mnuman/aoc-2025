@@ -10,3 +10,8 @@ def test_read_file():
 def test_part1():
     result = day07.part1("test_day07.txt")
     assert result == 21
+
+
+def test_part2():
+    result = day07.part2("test_day07.txt")
+    assert result == 40
