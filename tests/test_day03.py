@@ -7,3 +7,8 @@ def test_part1():
 
 def test_extract_max():
     assert day03.extract_max([int(c) for c in "234234234234278"]) == 434234234278
+    assert day03.extract_max([int(c) for c in "811111111111119"]) == 811111111119
+
+
+def test_part02():
+    assert day03.part22("test_day03.txt") == 3121910778619

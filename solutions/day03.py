@@ -9,7 +9,17 @@ def read_file(fname):
 
 
 def extract_max(inputs: list[int]) -> int:
-    return 0
+    choices = 12
+    start_pos = 0
+    length_inputs = len(inputs)
+    result = []
+    while choices > 0:
+        end_pos = length_inputs - choices + 1
+        current_max = max(inputs[start_pos:end_pos])
+        result.append(current_max)
+        start_pos = inputs.index(current_max, start_pos) + 1
+        choices -= 1
+    return int("".join(map(str, result)))
 
 
 def part1(fname):
@@ -21,9 +31,10 @@ def part1(fname):
     return sum(result)
 
 
-def part02(fname):
-    return sum([extract_max(line) for line in read_file(fname)])
+def part2(fname):
+    return sum([extract_max([int(c) for c in line]) for line in read_file(fname)])
 
 
 if __name__ == "__main__":
     print(part1("day03.txt"))
+    print(part2("day03.txt"))
